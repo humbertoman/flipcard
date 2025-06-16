@@ -18,16 +18,16 @@
 <div class="container">
   <div class="drag-list">
     <div class="drag-item" draggable="true" id="item0">
-      <span>Bonito</span>
+      <span>Carw</span>
     </div>
     <div class="drag-item" draggable="true" id="item1">
-      <span>Bonito 2</span>
-    </div>
-    <div class="drag-item" draggable="true" id="item2">
       <span>Car</span>
     </div>
+    <div class="drag-item" draggable="true" id="item2">
+      <span>Bonito 2</span>
+    </div>
     <div class="drag-item" draggable="true" id="item3">
-      <span>Carw</span>
+      <span>Bonito</span>
     </div></div>
   <div class="drop-list">
     <div class="drop-target" data-answer="https://humbertoman.github.io/flipcard/gifs/CARNAVAL.gif">
@@ -50,28 +50,19 @@
 <button id="check">Verificar</button>
 <script>
   function shuffle(a){return a.sort(()=>Math.random()-0.5);}
-  let dragged = null;
-  document.querySelectorAll('.drag-item').forEach(el=>{
-    el.addEventListener('dragstart',()=>dragged=el);
-  });
+  let dragged=null;
+  document.querySelectorAll('.drag-item').forEach(el=>el.addEventListener('dragstart',()=>dragged=el));
   document.querySelectorAll('.dropzone').forEach(zone=>{
-    zone.addEventListener('dragover',e=>{e.preventDefault(); zone.classList.add('over');});
+    zone.addEventListener('dragover',e=>{e.preventDefault();zone.classList.add('over');});
     zone.addEventListener('dragleave',()=>zone.classList.remove('over'));
-    zone.addEventListener('drop',e=>{
-      e.preventDefault();
-      zone.classList.remove('over');
-      if(!zone.firstElementChild) zone.appendChild(dragged);
-    });
+    zone.addEventListener('drop',e=>{e.preventDefault();zone.classList.remove('over');if(!zone.firstElementChild)zone.appendChild(dragged);});
   });
-  document.getElementById('check').onclick = ()=>{
-    document.querySelectorAll('.drop-target').forEach(target=>{
-      const zone = target.querySelector('.dropzone');
-      const child = zone.firstElementChild;
-      const answer = target.getAttribute('data-answer');
-      const text = child ? child.textContent.trim() : '';
-      target.classList.toggle('correct', text===answer);
-      target.classList.toggle('wrong', text!==answer);
-    });
-  };
+  document.getElementById('check').onclick=()=>document.querySelectorAll('.drop-target').forEach(t=>{
+    const z=t.querySelector('.dropzone').firstElementChild;
+    const ans=t.getAttribute('data-answer');
+    const txt=z?z.textContent.trim():'';
+    t.classList.toggle('correct',txt===ans);
+    t.classList.toggle('wrong',txt!==ans);
+  });
 </script>
 </body></html>
