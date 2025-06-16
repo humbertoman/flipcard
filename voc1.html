@@ -1,0 +1,22 @@
+
+<!DOCTYPE html>
+<style>
+.card-grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));width:100%;}
+.flip-card{width:100%;aspect-ratio:16/9;perspective:1000px;cursor:pointer;}
+.flip-card-inner{position:relative;width:100%;height:100%;transition:transform .7s;transform-style:preserve-3d;}
+.flip-card.flipped .flip-card-inner{transform:rotateY(180deg);}
+.face{position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:10px;overflow:hidden;}
+.front{display:flex;align-items:center;justify-content:center;background:#005792;color:#fff;font:600 1.4rem/1;}
+.back{transform:rotateY(180deg);}
+.back video,.back img,.back iframe{width:100%;height:100%;object-fit:cover;border:0;}
+.back iframe{pointer-events:none;}
+</style>
+<section class="card-grid">
+
+<div class="flip-card" tabindex="0" onclick="this.classList.toggle('flipped')">
+  <div class="flip-card-inner">
+    <div class="face front">Bonito</div>
+    <div class="face back"><iframe src="https://www.youtube.com/embed/7sioWt9pkUY?autoplay=1&mute=1&controls=0&loop=1&playlist=7sioWt9pkUY" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+  </div>
+</div>
+</section>
